@@ -1,0 +1,46 @@
+.dark-blue {
+  background: #00008b;
+  -webkit-box-shadow: inset 5px 5px 15px -3px rgba(3,0,239,1);
+-moz-box-shadow: inset 5px 5px 15px -3px rgba(3,0,239,1);
+box-shadow: inset 5px 5px 15px -3px rgba(3,0,239,1);
+}
+
+.dark-green {
+  background: #006400;
+}
+
+.dark-red {
+  background: #770000;
+  -webkit-box-shadow: inset 5px 5px 15px -3px rgba(186,2,2,1);
+  -moz-box-shadow: inset 5px 5px 15px -3px rgba(186,2,2,1);
+  box-shadow: inset 5px 5px 15px -3px rgba(186,2,2,1);
+}
+
+.goldenrod {
+  background: #DAA520;
+}
+
+.purple {
+  background: #800080;
+}
+
+.restart-level {
+  color: #fff;
+  background: darkgrey;
+}
+
+.quit {
+  color: #fff;
+  background: darkgrey;
+}
+
+.controlCell {
+  //outline: solid 2px #000;
+  //outline-offset: -2px;
+  margin: 3px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  float: left;
+  position: relative;
+}

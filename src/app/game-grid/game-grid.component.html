@@ -1,0 +1,9 @@
+<div class='game-grid'>
+  <app-cell *ngFor="let cell of gameGrid" 
+            [colorClass]=(cell.colorClass) 
+            [x]=(cell.x) 
+            [y]=(cell.y)
+            [index]=(cell.index)
+            [captured]=(cell.captured)>
+  </app-cell>
+</div>

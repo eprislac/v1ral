@@ -1,0 +1,5 @@
+<div *ngIf="capturedColor !== controlClass" class="controlCell {{ controlClass }}"  (click)="clickHandler()">
+  <span *ngIf="controlClass === 'quit' || controlClass === 'restart-level'">
+    {{ controlClass.charAt(0).toUpperCase() }}
+  </span>
+</div>

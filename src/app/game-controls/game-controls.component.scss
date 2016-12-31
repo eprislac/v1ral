@@ -1,0 +1,10 @@
+.game-controls {
+  display: inline;
+  max-width: 300px
+  
+  app-control-button {
+    float: left;
+    display: inline-block;
+    position: relative;
+  }
+}

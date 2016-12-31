@@ -1,0 +1,56 @@
+.board-header {
+  border: 2px #000 solid;
+  background: #000;
+  app-level-counter,
+  app-score-counter,
+  app-turns-counter {
+    display: inline-block;
+    padding: 10px;
+    background: lighten(#b8860b, 10);
+    border: 2px #000 double;
+
+    div {
+      float: left;
+      width: 200px;
+    }
+  }
+}
+
+.board-main {
+  width: 100%;
+  text-align: center;
+  clear: both;
+  float: none;
+  background: #000;
+
+  app-game-grid {
+    position: relative;
+    display: block;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 30px;
+    text-align: center;
+    background: #000;
+
+  }
+}
+
+.board-footer {
+  width: 100%;
+  text-align: center;
+  clear: both;
+  float: none;
+  background: #000;
+  padding-bottom: 30px;
+
+  app-game-controls {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 30px;
+    text-align: center;
+  }
+}

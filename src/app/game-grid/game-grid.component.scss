@@ -1,0 +1,16 @@
+
+.game-grid {
+  width: 600px;
+  height: 600px;
+  margin: 0;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+  app-cell {
+    position: relative;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+  }
+}

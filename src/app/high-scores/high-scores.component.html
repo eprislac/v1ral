@@ -1,0 +1,9 @@
+<div class="high-scores">
+  <h2>High Scores</h2>
+  <ol>
+    <li *ngFor="let score of scores">
+      <span class="initials">{{ score.initials }} :</span>
+      <span class="score">{{ score.score }}</span>
+    </li>
+  </ol>
+</div>
