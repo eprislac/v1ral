@@ -10,9 +10,8 @@ import { GameService } from '../game.service';
 })
 export class GameboardComponent implements OnInit {
 
-  constructor(private game: GameService) { }
+  constructor(private game: GameService, private stateManager: StateManagerService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

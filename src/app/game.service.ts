@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { StateManagerService } from 'sassy-state-manager-ng2'
-
+import { StateManagerService } from 'sassy-state-manager-ng2';
+import { SoundService } from './sound.service';
 
 
 interface ILevel {
@@ -14,31 +14,31 @@ export const LEVELS: Array<ILevel> = [
   { 
     levelNum: 1,
     numColors: 3,
-    numTurns: 50,
+    numTurns: 40,
     levelScore: 0
   },
   {
     levelNum: 2,
     numColors: 3,
-    numTurns: 45,
+    numTurns: 35,
     levelScore: 0
   },
   {
     levelNum: 3,
     numColors: 3,
-    numTurns: 40,
+    numTurns: 30,
     levelScore: 0
   },
   { 
     levelNum: 4,
     numColors: 3,
-    numTurns: 35,
+    numTurns: 25,
     levelScore: 0
   },
   {
     levelNum: 5,
     numColors: 3,
-    numTurns: 30,
+    numTurns: 20,
     levelScore: 0
   },
   { 
@@ -74,43 +74,44 @@ export const LEVELS: Array<ILevel> = [
   { 
     levelNum: 11,
     numColors: 5,
-    numTurns: 50,
+    numTurns: 60,
     levelScore: 0
   },
   {
     levelNum: 12,
     numColors: 5,
-    numTurns: 45,
+    numTurns: 55,
     levelScore: 0
   },
   {
     levelNum: 13,
     numColors: 5,
-    numTurns: 40,
+    numTurns: 45,
     levelScore: 0
   },
   { 
     levelNum: 14,
     numColors: 5,
-    numTurns: 35,
+    numTurns: 40,
     levelScore: 0
   },
   {
     levelNum: 15,
     numColors: 5,
-    numTurns: 30,
+    numTurns: 35,
     levelScore: 0
   }
 ]
 
 @Injectable()
 export class GameService {
-  constructor(private stateManager: StateManagerService) { 
+  constructor(private stateManager: StateManagerService, private sound: SoundService) { 
     let game = this.newGame();
     this.setNewGameModel(game);
   }
   
   private newGame(): Object {
+    this.sound.backgroundLoop.play();
     let game: any = Object(LEVELS[0]);
     game.score = 0;
     return game;
@@ -127,20 +128,24 @@ export class GameService {
       .getModel('game')
       .take(1)
       .subscribe((data) => {
+        
         let multiplier: number;
         let _updateGame = function(state) {
-          state = Object.assign({}, data);
+          let game = Object.assign({}, data);
+
+          game.numTurns = data.numTurns - 1;
+          if (game.numTurns === 0) {
+            return self.gameOver();
+          }
+
           if (numCaptured > 9) { multiplier = 2; }
           else if (numCaptured > 19) { multiplier = 3; }
           else if (numCaptured > 29) { multiplier = 4; }
           else { multiplier = 1; }
 
-          state.levelScore = data.levelScore + ((numCaptured * 10) * multiplier);
-          state.numTurns = data.numTurns - 1;
-          if (state.numTurns === 0) {
-            this.gameOver();
-          }
-          return state; 
+          game.levelScore = data.levelScore + ((numCaptured * 10) * multiplier);
+          
+          return game; 
         }
         return this.stateManager.update('game')(_updateGame);
       });
@@ -148,6 +153,7 @@ export class GameService {
   }
 
   public advanceLevel() {
+    this.sound.backgroundLoop.play();
     let self = this;
     self
       .stateManager
@@ -157,18 +163,32 @@ export class GameService {
         if (data.levelNum === 15) { return self.gameOver(); }
         else {
           let newLevel = Object(LEVELS[data.levelNum]);
-          newLevel.score = data.score + data.levelScore + 1;
+          newLevel.score = data.score 
+            + data.levelScore 
+            + (data.numTurns * 10)
+            + 100;
+
           let  _advanceLevel = function(state) {
             state = newLevel;
             return state;
           }
+          self.sound.success.play();
           self.stateManager.update('game')(_advanceLevel);
         }
       });
   }
 
   gameOver() {
-    alert('Game Over')
+    let _gameOver = function(state) {
+      let update = Object.assign({}, state);
+      update.gameOver = true;
+      
+      return update;
+    }
+    this.sound.backgroundLoop.pause();
+    this.sound.success.play();
+    this.stateManager.update('game')(_gameOver);
+    
   }
 
 }

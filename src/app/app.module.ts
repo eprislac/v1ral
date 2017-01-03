@@ -17,7 +17,9 @@ import { StateManagerService } from 'sassy-state-manager-ng2'
 import { AngularFireModule, FIREBASE_PROVIDERS } from 'angularfire2';
 import { RouterModule, Routes } from '@angular/router';
 import { ScoreService } from './score.service';
+import { SoundService } from './sound.service';
 import { ControlButtonComponent } from './control-button/control-button.component';
+import { InitialsFormComponent } from './initials-form/initials-form.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -53,6 +55,7 @@ export const appRoutes: Routes = [
     GameGridComponent,
     MenuButtonComponent,
     ControlButtonComponent,
+    InitialsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ export const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(appRoutes)    
   ],
-  providers: [ StateManagerService, ScoreService ],
+  providers: [ StateManagerService, ScoreService, SoundService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@
   margin: 0;
   transform-origin: 50% 50%;
   transform: rotate(-90deg);
+  
   app-cell {
     position: relative;
     display: inline;
@@ -13,4 +14,11 @@
     height: 30px;
     width: 30px;
   }
+}
+
+.game-over {
+  h1 { color: #999 };
+  color : #ccc;
+  font-weight: bold;
+  font-family: Courier New, Courier, monospace;
 }

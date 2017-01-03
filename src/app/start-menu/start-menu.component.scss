@@ -1,4 +1,19 @@
 .start-menu {
   padding-top: 20px;
   text-align: center;
+  background: #000;
+  font-family: Courier New, Courier, monospace;
+  color: #ccc;
+  .description {
+    width: 800px;
+    text-align: center;
+    display: inline-block;
+    clear: both;
+    p {
+      padding: 10px;
+    }
+    
+    
+  }
+
 }

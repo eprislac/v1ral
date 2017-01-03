@@ -1,4 +1,4 @@
-<div class='game-grid'>
+<div *ngIf=(!gameOver) class='game-grid'>
   <app-cell *ngFor="let cell of gameGrid" 
             [colorClass]=(cell.colorClass) 
             [x]=(cell.x) 
@@ -6,4 +6,8 @@
             [index]=(cell.index)
             [captured]=(cell.captured)>
   </app-cell>
+</div>
+<div *ngIf=(gameOver) class="game-over">
+  <h1>Game Over!</h1>
+  <app-high-scores></app-high-scores>
 </div>

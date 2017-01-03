@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StateManagerService } from 'sassy-state-manager-ng2';
 import { GameService } from '../game.service';
+import { SoundService } from '../sound.service';
 
 @Component({
   selector: 'app-control-button',
@@ -24,11 +25,17 @@ export class ControlButtonComponent implements OnInit {
     'quit': this.quit
   }
 
-  constructor(private stateManager: StateManagerService, private game: GameService) { }
+  constructor(private stateManager: StateManagerService, 
+              private game: GameService, 
+              private sound: SoundService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
 
+  }
+ 
   clickHandler() {
+    console.log('volume: ' + this.sound.button.volume, 'rate: ' + this.sound.button.playbackRate);
+    this.sound.button.play();
     return this.controlMethods[this.controlClass](this);
   }
 
@@ -59,43 +66,46 @@ export class ControlButtonComponent implements OnInit {
               return cell;
             }
           })
-          .map((cell) => {
-            if((!cell.captured) && (cell.colorClass === self.capturedColor)) {
-              let n: number = cell.y + 1;
-              let s: number = cell.y - 1;
-              let e: number = cell.x + 1;
-              let w: number = cell.x - 1;
-              let x: number = cell.x;
-              let y: number = cell.y;
-              let xNeighbors: Array<number> = [e, w].filter(num => num > -1);
-              let yNeighbors: Array<number> = [n, s].filter(num => num > -1);
-              let capturedState: boolean;
-              capturedState = state
-                .filter((nCell) => {
-                  return (nCell.x === x && yNeighbors.includes(nCell.y)) ||
-                    (nCell.y === y && xNeighbors.includes(nCell.x));
-                })
-                .some((nCell) => {
-                        return (nCell.captured) && 
-                               (nCell.colorClass === self.capturedColor)}
-                     )
-              numCaptured = capturedState ? ++numCaptured : numCaptured
-              cell.captured = capturedState;
-              return cell;
-            } else {
-              return cell;
-            }
-          });
+          .map(cell => _checkCaptured(cell, instance, state))
+          .map(cell => _checkCaptured(cell, instance, state))
+          .map(cell => _checkCaptured(cell, instance, state));
         }
+
+        let _checkCaptured = function(cell, instance, state) {
+          if((!cell.captured) && (cell.colorClass === self.capturedColor)) {
+            let n: number = cell.y + 1;
+            let s: number = cell.y - 1;
+            let e: number = cell.x + 1;
+            let w: number = cell.x - 1;
+            let x: number = cell.x;
+            let y: number = cell.y;
+            let xNeighbors: Array<number> = [e, w].filter(num => num > -1);
+            let yNeighbors: Array<number> = [n, s].filter(num => num > -1);
+            let capturedState: boolean;
+            capturedState = state
+              .filter((nCell) => {
+                return (nCell.x === x && yNeighbors.includes(nCell.y)) ||
+                        (nCell.y === y && xNeighbors.includes(nCell.x));
+              })
+              .some((nCell) => {
+                return (nCell.captured) && 
+                        (nCell.colorClass === self.capturedColor)
+              })
+            numCaptured = capturedState ? ++numCaptured : numCaptured
+            cell.captured = capturedState;
+            return cell;
+          } else {
+            return cell;
+          }
+        }
+
         self.stateManager.update('gameGrid')(_changeColor);
         instance.game.updateGame(numCaptured);
       })
       
   }
 
-  checkCaptured(cell, instance) {
-
-  }
+  
 
   advanceLevel(instance) {
     instance.game.advanceLevel();

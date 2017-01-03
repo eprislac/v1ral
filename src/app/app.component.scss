@@ -1,6 +1,13 @@
 html, body, app-root {
-  background: #000;
+  background: #000!important;
   height: 100%;
+  font-weight: bold;
+  font-family: Courier New, Courier, monospace;
+}
+html {
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 
 header {
@@ -8,7 +15,9 @@ header {
   text-align: center;
   
   h1 {
-    color: #fff;
+    color: #999;
+    font-weight: bold;
+    font-family: Courier New, Courier, monospace;
   }
 }
 

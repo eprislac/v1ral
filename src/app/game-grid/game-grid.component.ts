@@ -20,6 +20,7 @@ interface IGridCell {
 
 export class GameGridComponent implements OnInit {
   gameGrid: Array<IGridCell> = [];
+  gameOver: boolean = false;
   initialCell: IGridCell;
   constructor(private stateManager: StateManagerService, 
               private colors: ColorsService,
@@ -30,7 +31,9 @@ export class GameGridComponent implements OnInit {
       .stateManager
       .getModel('game')
       .subscribe((data) => {
-        let level = LEVELS[data.levelNum - 1]
+        let level = LEVELS[data.levelNum - 1];
+        this.gameOver = data.gameOver;
+        
         if(level === data) {
           this.createGrid(data.numColors);
         }

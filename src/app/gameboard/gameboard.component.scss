@@ -1,6 +1,9 @@
 .board-header {
   border: 2px #000 solid;
   background: #000;
+  
+  font-weight: bold;
+  font-family: Courier New, Courier, monospace;
   app-level-counter,
   app-score-counter,
   app-turns-counter {
@@ -22,6 +25,9 @@
   clear: both;
   float: none;
   background: #000;
+  color: #999;
+  font-weight: bold;
+  font-family: Courier New, Courier, monospace;
 
   app-game-grid {
     position: relative;
@@ -32,7 +38,9 @@
     line-height: 30px;
     text-align: center;
     background: #000;
-
+    color: #999;
+    font-weight: bold;
+    font-family: Courier New, Courier, monospace;
   }
 }
 
@@ -43,6 +51,7 @@
   float: none;
   background: #000;
   padding-bottom: 30px;
+  bottom: 0px;
 
   app-game-controls {
     position: relative;
