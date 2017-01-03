@@ -5,27 +5,22 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Game Description
+<div class="description">
+    <p>In this game, you take the role of a malware which emulates nodes of its target system in order to infect and gain control over it.</p>
+    <p>The nodes are represented by different colored blocks. <br/>
+    The malware (you) starts off each level in the colorless node at the bottom left of the grid</p>
+    <p>Select the color you would like to emulate from the control buttons below the grid. <br/> 
+      Selecting a color switches all infected nodes to the chosen color,
+      and infects adjacent nodes which share that color</p>
+    <p>Each level you are given a number of tries to infect the entire system. <br/>
+      Every five levels, a new color is added.<br />
+      Point bonuses are given for remaining tries, and for infecting larger numbers of nodes. <br/>
+    </p>
+    <p>When you have zero tries remaining, <br />
+      the systems' anti-malware systems has caught up with you, and the game is over.</p>
+    <p>The game is currently in pre-alpha, high-score updating does not work. <br/>
+    However, the game is playable - it currently has 15 levels and working sound. <br/>
+    On the roadmap are a fix for high scores, and an options menu to adjust or turn off audio.</p>
+    
+  </div>
