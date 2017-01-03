@@ -8,7 +8,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Game Description
 <div class="description">
     <p>In this game, you take the role of a malware which emulates nodes of a targeted host system in order to infect and gain control over it.</p>
-    <p>The nodes are represented by different colored blocks in a 20 x 20 grid, and the systems get more complex as teh levels progress.<br/>
+    <p>The nodes are represented by different colored blocks in a 20 x 20 grid, and the systems get more complex as the levels progress.<br/>
     The malware (you) starts off each level in the colorless node at the bottom left of the grid</p>
     <p>Select the color you would like to emulate from the control buttons below the grid. <br/> 
       Selecting a color switches all infected nodes to the chosen color,
