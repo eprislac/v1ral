@@ -134,7 +134,7 @@ export class GameService {
           let game = Object.assign({}, data);
 
           game.numTurns = data.numTurns - 1;
-          if (game.numTurns === 0) {
+          if (game.numTurns === 0 && numCaptured < 400) {
             return self.gameOver();
           }
 
