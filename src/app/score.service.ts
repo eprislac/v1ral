@@ -11,12 +11,19 @@ export interface IHighScore {
 
 @Injectable()
 export class ScoreService implements OnInit{
-  public highScores;
+  public highScoresList: FirebaseListObservable<any[]>;
+  public highScoresObject;
 
-  constructor(private stateManager: StateManagerService, private af: AngularFire) { 
-    this.highScores = this.af.database.object('/scores')
-    this.highScores.subscribe(data => {
-      this.stateManager.setModel('highScores', data.data);
+  constructor(private stateManager: StateManagerService, private af: AngularFire) {
+    
+    this.highScoresObject = this.af.database.object('/scores')
+    this.highScoresList = this.af.database.list('/scores', {query: {orderByChild: 'score'}});
+    this.highScoresList.subscribe(data => {
+      this.stateManager
+        .setModel('highScores', 
+          data
+            .map((item) =>{return {initials: item.initials, score: item.score}})
+            .sort((a,b) => {return b.score - a.score}));
     });
   }
 
@@ -39,33 +46,18 @@ export class ScoreService implements OnInit{
   public submitInitials(initials): void {
     let self = this;
 
-    this.syncHighScores();
-
     this
       .compareHighScores()
       .take(1)
       .subscribe((combined) => {
         let gs = { initials: initials, score: combined[0].score }
-        let hsa = combined[1];
-        hsa
-          .sort((a,b) => { return a.score - b.score })
-          .pop();
-        hsa.push(gs);
-
-        let _updateHighScores = function(state) {
-          state = hsa;
-          return state;
-        }
-
-        this.stateManager.update('highScores')(_updateHighScores);
+        let hsa: Array<any> = [gs]
+          .concat(combined[1])
+          .sort((a,b) => {return a.score - b.score})
+          .slice(1)
+          .sort((a,b) => {return b.score - a.score});
+        self.highScoresObject.set(hsa);
+        self.highScoresList = self.af.database.list('/scores', {query: {orderByChild: 'score'}});
       });
-  }
-
-  public syncHighScores() {
-    this
-      .fetchHighScoresModel()
-      .subscribe((data) => {
-        return this.af.database.object('/scores').update({data});
-      })
   }
 }
