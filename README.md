@@ -19,7 +19,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
     </p>
     <p>When you have zero tries remaining, <br />
       the host systems' anti-malware program has caught up with you, and the game is over.</p>
-    <p>The game is currently in pre-alpha, high-score updating does not work. <br/>
-    However, the game is playable - it currently has 15 levels and working sound. <br/>
-    On the roadmap are a fix for high scores, level difficulty balancing, and an options menu to adjust or turn off audio.</p>
+    <p>The game is currently in pre-alpha. <br/>
+    However, the game is playable - it currently has 15 levels, working sound, and a mechanism to save high-scores to Firebase. <br/>
+    On the roadmap are more visual polish, level difficulty balancing, and an options menu to adjust or turn off audio.</p>
   </div>
